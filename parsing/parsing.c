@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 18:04:35 by w                 #+#    #+#             */
-/*   Updated: 2025/08/02 12:08:23 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/03 20:53:43 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 
 static void free_lexer(t_lexer *lex)
 {
+    // Don't free any tracked memory - ft_free_all() will handle it
     t_lexer *tmp;
     while (lex)
     {
         tmp = lex;
         lex = lex->next;
-        free(tmp->value);
-        free(tmp);
+        // Remove all free() calls:
+        // free(tmp->value);  // Don't free - tracked by ft_malloc
+        // free(tmp);         // Don't free - tracked by ft_malloc
     }
 }
 
@@ -122,8 +124,8 @@ int parse_commands(char *str, t_data **data)
     if (!d_quote(str, 0, 0, 0) || !check_pipe(str))
     {
         // g_es = 2;
-		ft_putendl_fd("minishell~$ syntax error near unexpected", 2);
-		return 1;
+        ft_putendl_fd("minishell~$ syntax error near unexpected", 2);
+        return 1;
     }
     else
     {
@@ -137,7 +139,7 @@ int parse_commands(char *str, t_data **data)
             char **args = ft_split_space(new_line);
             if (check_redirections(args) == 0)
             {
-		        ft_putendl_fd("minishell~$ syntax error near unexpected", 2);
+                ft_putendl_fd("minishell~$ syntax error near unexpected", 2);
                 return 1;
             }
             if (!args)
@@ -149,7 +151,7 @@ int parse_commands(char *str, t_data **data)
             t_lexer *lex = ft_cmp(args);
             if (!lex)
             {
-                ft_free_2d(args);
+                // ft_free_2d(args);  // REMOVED - don't free tracked memory
                 i++;
                 continue;
             }
@@ -158,7 +160,7 @@ int parse_commands(char *str, t_data **data)
             if (!cmds)
             {
                 free_lexer(lex);
-                ft_free_2d(args);
+                // ft_free_2d(args);  // REMOVED - don't free tracked memory
                 i++;
                 continue;
             }
@@ -175,47 +177,45 @@ int parse_commands(char *str, t_data **data)
                 ft_lstadd_back_data(data, node);
             }
             free_lexer(lex);
-            ft_free_2d(args);
+            // ft_free_2d(args);       // REMOVED - don't free tracked memory
             i++;
         }
-        ft_free_2d(pipe_split);
+        // ft_free_2d(pipe_split);    // REMOVED - don't free tracked memory
     }
     return 0;
 }
 
 void free_list(t_data *begin)
 {
+    // Don't free any tracked memory - ft_free_all() will handle it
+    // This function now just serves to traverse and clean up the list structure
+    
     t_data *tmp;
     while (begin)
     {
         tmp = begin;
         begin = begin->next;
-
-        if (tmp->cmds)
-        {
-            for (int i = 0; tmp->cmds[i]; i++)
-                free(tmp->cmds[i]);
-            free(tmp->cmds);
-        }
-
+        
+        // Remove all free() calls for tracked memory:
+        // - Don't free tmp->cmds[i] 
+        // - Don't free tmp->cmds
+        // - Don't free tmp itself
+        
+        // Only traverse the sublists to clean up pointers
         t_redir *r = tmp->redir;
         while (r)
         {
             t_redir *next = r->next;
-            free(r->filename);
-            free(r);
+            // Don't free r->filename or r
             r = next;
         }
-
+        
         t_heredoc *h = tmp->herdoc;
         while (h)
         {
             t_heredoc *next = h->next;
-            free(h->delimeter);
-            free(h);
+            // Don't free h->delimeter or h
             h = next;
         }
-
-        free(tmp);
     }
 }

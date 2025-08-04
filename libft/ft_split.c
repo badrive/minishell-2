@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ielyatim <ielyatim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:20:13 by ielyatim          #+#    #+#             */
-/*   Updated: 2024/11/01 15:08:20 by ielyatim         ###   ########.fr       */
+/*   Updated: 2025/08/03 20:58:40 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "../parsing/parsing.h"
 
 static int	ft_count_words(const char *str, char c)
 {
@@ -41,7 +42,7 @@ static char	*ft_walloc(const char *str, char c, size_t *i)
 	j = 0;
 	while (str[*i + j] != '\0' && str[*i + j] != c)
 		j++;
-	dest = malloc((j + 1) * sizeof(char));
+	dest = ft_malloc((j + 1) * sizeof(char));
 	if (!dest)
 		return (NULL);
 	j = 0;
@@ -74,7 +75,7 @@ char	**ft_split(char const *s, char c)
 
 	if (!s)
 		return (NULL);
-	arr = malloc(sizeof(char *) * (ft_count_words(s, c) + 1));
+	arr = ft_malloc(sizeof(char *) * (ft_count_words(s, c) + 1));
 	if (arr)
 	{
 		i = 0;

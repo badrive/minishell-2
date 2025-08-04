@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 17:49:54 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/02 14:43:11 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/03 21:35:22 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	**expand_and_split(char *line, char **info)
 	if (!expanded)
 		return (NULL);
 	split_line = ft_split(expanded, '|');
-	free(expanded);
+	// free(expanded);
 	return (split_line);
 }
 // expend 
@@ -52,7 +52,7 @@ char	*expand_line(char *line, int dquote, char *plus, char **info)
 		i = skip_quotes(line, i, &dquote);
 		line_plus = ft_substr(line, 0, i);
 		temp_plus = ft_strjoin1(plus, line_plus);
-		free(line_plus);
+		// free(line_plus);
 		plus = temp_plus;
 		if (line[i] == '$')
 		{
@@ -77,7 +77,7 @@ char	*expand_line1(char *line, char *plus, char **info)
 		i++;
 		line_plus = ft_substr(line, 0, i);
 		temp_plus = ft_strjoin(plus, line_plus);
-		free(line_plus);
+		// free(line_plus);
 		plus = temp_plus;
 		if (line[i] == '$')
 		{
@@ -189,7 +189,7 @@ char	*ft_strjoin1(char const *s1, char const *s2)
 	while (s2[i])
 		str[s1_len++] = s2[i++];
 	str[s1_len] = '\0';
-	return (free((char *)s1), str);
+	return (str);
 }
 char	*handle_dollar_case(char *start)
 {

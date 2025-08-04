@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 14:51:32 by w                 #+#    #+#             */
-/*   Updated: 2025/08/02 11:57:29 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/03 21:01:16 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ char	**ft_split(const char *s, char sep)
 	j = 0;
 	if (!s)
 		return (NULL);
-	res = malloc(sizeof(char *) * (count_words(s, sep) + 1));
+	res = ft_malloc(sizeof(char *) * (count_words(s, sep) + 1));
 	if (!res)
 		return (NULL);
 	while (s[i])

@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 18:20:49 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/02 11:56:42 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/03 15:40:04 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,10 @@ char	**ft_split_space(const char *s)
 		len = get_word_len(&s[i]);
 		res[j] = copy_word(&s[i], len);
 		if (!res[j])
+		{
 			return (free_all(res, j));
+			// ft_free_all();		
+		}
 		i += len;
 		j++;
 	}
