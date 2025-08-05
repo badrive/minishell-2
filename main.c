@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 12:18:26 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/04 11:31:04 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/04 17:06:16 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #include "minishel.h"
 
 // void    execution(t_data *data);
-
-
 
 int is_redir_char(char c) 
 {
@@ -127,7 +125,6 @@ int main(int ac, char **av, char **envp)
 		}
         execute_command(data, env);
 		// free
-		free_list(data);
 		data = NULL;
         add_history(str);
         free(str);

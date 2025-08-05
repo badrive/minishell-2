@@ -8,8 +8,8 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
 
 SRCS = main.c \
-	parsing/parsing.c parsing/split.c parsing/test.c parsing/test2.c\
-	parsing/lst/lst_cmd.c parsing/lst/lst_heredoc.c parsing/test3.c parsing/anti_leaks.c \
+	parsing/parsing.c parsing/split.c parsing/utils1.c parsing/utils2.c\
+	parsing/lst/lst_cmd.c parsing/lst/lst_heredoc.c parsing/utils3.c parsing/anti_leaks.c \
 	parsing/lst/lst_lexer.c parsing/lst/lst_redir.c parsing/ft_split_s.c \
 	execution/builtin_cd.c execution/builtin_env.c \
 	execution/builtin_unset.c execution/execution.c \

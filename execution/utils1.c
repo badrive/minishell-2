@@ -43,8 +43,11 @@ void	run_heredoc_child(t_heredoc *heredoc, int write_fd)
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || ft_strcmp(line, heredoc->delimeter) == 0)
+		
+		if (!line || ft_strcmp(line, qoute_remov(heredoc->delimeter,0 , 0, 0)) == 0)
 			break;
+		if (!ft_strchr("\'\"", heredoc->delimeter[0]))
+			line = expand_line1(line, ft_strdup(""), NULL);
 		write(write_fd, line, strlen(line));
 		write(write_fd, "\n", 1);
 		free(line);
@@ -53,7 +56,6 @@ void	run_heredoc_child(t_heredoc *heredoc, int write_fd)
 	close(write_fd);  // Close write end of the pipe
 	exit(0);          // Exit child process
 }
-
 
 int is_builtin(char *cmd)
 {
