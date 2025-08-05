@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 18:29:34 by w                 #+#    #+#             */
-/*   Updated: 2025/08/02 11:55:22 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/05 13:41:26 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_redirections
 typedef struct s_heredoc
 {
     char *delimeter;
+    int     is_quated;
     t_heredoc *next;
 } t_heredoc;
 
@@ -66,7 +67,6 @@ typedef struct s_env {
     char *value;
     struct s_env *next;
 } t_env;
-
 
 typedef struct s_cmd
 {
@@ -85,7 +85,6 @@ typedef struct s_data
 }   t_data;
 
 /*
-
 int	add_addr(t_general *ctx, t_memory *new_addr)
 {
 	t_memory	*tmp;
@@ -216,6 +215,6 @@ int	skip_quote(const char *s, int i);
 t_save	**save_add(void);
 void	*ft_malloc(size_t size);
 void	ft_free_all(void);
-
+char	*expand_line1(char *line, char *plus, char **info);
 
 #endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 17:49:54 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/03 21:35:22 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/04 22:28:02 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	**expand_and_split(char *line, char **info)
 	// free(expanded);
 	return (split_line);
 }
-// expend 
+// expend
 
 char	*expand_line(char *line, int dquote, char *plus, char **info)
 {
@@ -49,7 +49,7 @@ char	*expand_line(char *line, int dquote, char *plus, char **info)
 	{
 		i = 0;
 		while (line[i] && line[i] != '$')
-		i = skip_quotes(line, i, &dquote);
+			i = skip_quotes(line, i, &dquote);
 		line_plus = ft_substr(line, 0, i);
 		temp_plus = ft_strjoin1(plus, line_plus);
 		// free(line_plus);
@@ -74,7 +74,7 @@ char	*expand_line1(char *line, char *plus, char **info)
 	{
 		i = 0;
 		while (line[i] && line[i] != '$')
-		i++;
+			i++;
 		line_plus = ft_substr(line, 0, i);
 		temp_plus = ft_strjoin(plus, line_plus);
 		// free(line_plus);
@@ -100,12 +100,12 @@ int	skip_quotes(char *line, int i, int *dquote)
 	{
 		i++;
 		while (line[i] && line[i] != '\'')
-		i++;
+			i++;
 		if (line[i])
-		i++;
+			i++;
 	}
 	else
-	i++;
+		i++;
 	return (i);
 }
 
@@ -113,22 +113,22 @@ int	handle_dollar(char **plus, char *line, char **info)
 {
 	int		i;
 	char	*exp;
-	
+
 	i = 1;
 	exp = expand_val(line, info);
 	*plus = ft_strjoin1(*plus, exp);
 	if (line[i] && (line[i] == '?' || ft_isdigit(line[i])))
-	i++;
+		i++;
 	else if (line[i] == '$')
 	{
 		while (line[i] == '$')
-		i++;
+			i++;
 		i--;
 	}
 	else
 	{
 		while (line[i] && ft_isalnum(line[i]))
-		i++;
+			i++;
 	}
 	// free(exp);
 	return (i);
@@ -136,21 +136,21 @@ int	handle_dollar(char **plus, char *line, char **info)
 
 char	*expand_val(char *s, char **info)
 {
-	(void)info;
 	char	*start;
 	char	*temp;
 	char	*dollar;
-	
+
+	(void)info;
 	start = ft_strnstr(s, "$", ft_strlen(s));
 	if (!start)
-	return (NULL);
+		return (NULL);
 	if (!start[1])
-	return (ft_strdup("$"));
+		return (ft_strdup("$"));
 	if (start[1] == '$')
-	return (handle_dollar_case(start));
+		return (handle_dollar_case(start));
 	temp = find_end(start);
 	if (!temp)
-	return (NULL);
+		return (NULL);
 	// dollar = get_env_value(temp, info->my_envp);
 	dollar = getenv(temp);
 	// free(temp);
@@ -203,7 +203,7 @@ char	*handle_dollar_case(char *start)
 
 char	*find_end(char *start)
 {
-	int	i;
+	int i;
 
 	i = 1;
 	if (start[i] && start[i] == '?')

@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test2.c                                            :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 15:02:15 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/02 11:58:10 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/05 14:13:53 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
 
 int	check_split(char *line, int i, char q)
 {
@@ -118,7 +117,7 @@ int	if_check_pipe(char *line, int i, char q)
 
 char	*qoute_remov(char *line, char q, int i, int l)
 {
-	char	*new_line;
+	char *new_line;
 
 	new_line = ft_malloc(sizeof(char) * (ft_strlen(line) + 1));
 	while (line[i])

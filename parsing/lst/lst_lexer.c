@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 11:58:08 by w                 #+#    #+#             */
-/*   Updated: 2025/08/02 11:55:52 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/05 14:04:09 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_lexer *ft_cmp(char **av)
         {
             ft_lstadd_back_lexer(&tokens, new_node_lexer(av[i], HEREDOC));
             if (av[i + 1])
-                ft_lstadd_back_lexer(&tokens, new_node_lexer(qoute_remov(av[i + 1], 0, 0, 0), DELIMITER));
+                ft_lstadd_back_lexer(&tokens, new_node_lexer(av[i + 1], DELIMITER));
             i += 2;
             continue;
         }

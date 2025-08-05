@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 16:43:53 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/03 18:38:32 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/04 11:51:55 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,18 @@ void	*ft_malloc(size_t size)
 	return (add);
 }
 
-int is_ft_malloc_ptr(void *ptr)
+int	is_ft_malloc_ptr(void *ptr)
 {
-    t_save *head = *save_add();
-    while (head)
+	t_save	*head;
+
+	head = *save_add();
+	while (head)
 	{
-        if (head->add == ptr)
-            return (1);
-        head = head->next;
-    }
-    return (0);
+		if (head->add == ptr)
+			return (1);
+		head = head->next;
+	}
+	return (0);
 }
 
 void	ft_free_all(void)
@@ -71,7 +73,6 @@ void	ft_free_all(void)
 		if (temp->add)
 			free(temp->add);
 		free(temp);
-		// printf("time loop [%i]\n", i);
 		i++;
 	}
 }
