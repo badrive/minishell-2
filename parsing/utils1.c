@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 17:49:54 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/04 22:28:02 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/05 18:27:01 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,36 @@ int	is_pipe_syntax_error(char *line, int i)
 	return (i);
 }
 
+int check(char *line)
+{
+	int i =0;
+	while(line[i])
+		{
+		if(line[i] == '<' && line[i+1] == '<')
+			{
+				while(line[i] == ' ' || line[i] == '<' )
+					i++;
+				if(line[i] == '$')
+					return 0;
+			}
+			i++;
+		}
+		return 1;
+}
+
 char	**expand_and_split(char *line, char **info)
 {
 	char	*expanded;
 	char	**split_line;
 
-	expanded = expand_line(line, 0, ft_strdup(""), info);
-	if (!expanded)
-		return (NULL);
+	if(check(line) == 1)
+	{
+		expanded = expand_line(line, 0, ft_strdup(""), info);
+		if (!expanded)
+			return (NULL);
+	}
+	else 
+		expanded = ft_strdup(line);
 	split_line = ft_split(expanded, '|');
 	// free(expanded);
 	return (split_line);
@@ -191,6 +213,7 @@ char	*ft_strjoin1(char const *s1, char const *s2)
 	str[s1_len] = '\0';
 	return (str);
 }
+
 char	*handle_dollar_case(char *start)
 {
 	int	i;

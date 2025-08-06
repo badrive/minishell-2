@@ -68,7 +68,7 @@ static char	*copy_word(const char *s, int len)
 	char	*word;
 	char	quote;
 
-	int (i), (j);
+	int(i), (j);
 	word = (char *)ft_malloc(len + 1);
 	i = 0;
 	j = 0;
@@ -104,7 +104,7 @@ char	**ft_split_space(const char *s)
 {
 	char	**res;
 
-	int (i), (j), (len);
+	int(i), (j), (len);
 	i = 0;
 	j = 0;
 	if (!s)

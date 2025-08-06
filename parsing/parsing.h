@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 18:29:34 by w                 #+#    #+#             */
-/*   Updated: 2025/08/05 13:41:26 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/05 17:09:37 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ typedef struct s_redirections
 typedef struct s_heredoc
 {
     char *delimeter;
-    int     is_quated;
     t_heredoc *next;
 } t_heredoc;
 

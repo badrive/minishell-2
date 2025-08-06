@@ -36,6 +36,7 @@ int	setup_heredoc_pipe(t_heredoc *heredoc, int *pipefd, pid_t *pid)
 void	run_heredoc_child(t_heredoc *heredoc, int write_fd)
 {
 	char	*line;
+	int		i;
 
 	signal(SIGINT, SIG_DFL);  // Enable Ctrl+C in child
 	line = NULL;
@@ -46,8 +47,19 @@ void	run_heredoc_child(t_heredoc *heredoc, int write_fd)
 		
 		if (!line || ft_strcmp(line, qoute_remov(heredoc->delimeter,0 , 0, 0)) == 0)
 			break;
-		if (!ft_strchr("\'\"", heredoc->delimeter[0]))
-			line = expand_line1(line, ft_strdup(""), NULL);
+        i = 0;
+        int has_quotes = 0;
+        while (heredoc->delimeter[i])
+        {
+            if (ft_strchr("\'\"", heredoc->delimeter[i]))
+            {
+                has_quotes = 1;
+                break;
+            }
+            i++;
+        }
+        if (!has_quotes)
+            line = expand_line1(line, ft_strdup(""), NULL);
 		write(write_fd, line, strlen(line));
 		write(write_fd, "\n", 1);
 		free(line);
