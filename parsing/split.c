@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 14:51:32 by w                 #+#    #+#             */
-/*   Updated: 2025/08/04 22:29:00 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/07 17:37:27 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static char	*copy_word(const char *s, int len)
 	char	*word;
 	char	quote;
 
-	int(i), (j);
+	int (i), (j);
 	i = 0;
 	j = 0;
 	word = (char *)ft_malloc(len + 1);
@@ -85,9 +85,9 @@ static void	*free_all(char **arr, int count)
 
 char	**ft_split(const char *s, char sep)
 {
-	char **res;
+	char	**res;
 
-	int(i), (j), (len);
+	int (i), (j), (len);
 	i = 0;
 	j = 0;
 	if (!s)

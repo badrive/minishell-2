@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 18:41:42 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/04 22:28:12 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/07 18:13:05 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ char	*fix_line(char *line)
 	new_line[l] = '\0';
 	return (new_line);
 }
+
 int	check_redirections(char **p_line)
 {
 	int	i;

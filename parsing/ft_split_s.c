@@ -6,16 +6,11 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 18:20:49 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/04 12:19:46 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/07 22:40:18 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
-int	is_quote(char c)
-{
-	return (c == '\'' || c == '\"');
-}
 
 int	skip_quote(const char *s, int i)
 {
@@ -68,7 +63,7 @@ static char	*copy_word(const char *s, int len)
 	char	*word;
 	char	quote;
 
-	int(i), (j);
+	int (i), (j);
 	word = (char *)ft_malloc(len + 1);
 	i = 0;
 	j = 0;
@@ -92,19 +87,11 @@ static char	*copy_word(const char *s, int len)
 	return (word);
 }
 
-static void	*free_all(char **arr, int count)
-{
-	while (--count >= 0)
-		free(arr[count]);
-	free(arr);
-	return (NULL);
-}
-
 char	**ft_split_space(const char *s)
 {
 	char	**res;
 
-	int(i), (j), (len);
+	int (i), (j), (len);
 	i = 0;
 	j = 0;
 	if (!s)
@@ -121,7 +108,7 @@ char	**ft_split_space(const char *s)
 		len = get_word_len(&s[i]);
 		res[j] = copy_word(&s[i], len);
 		if (!res[j])
-			return (free_all(res, j));
+			return (NULL);
 		i += len;
 		j++;
 	}

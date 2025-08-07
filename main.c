@@ -6,25 +6,21 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 12:18:26 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/04 17:06:16 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/07 20:21:02 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "minishel.h"
 
-// void    execution(t_data *data);
-
-int is_redir_char(char c) 
+int	is_redir_char(char c)
 {
-    return (c == '>' || c == '<');
+	return (c == '>' || c == '<');
 }
 
-int check_pipe_syntax(const char *input, int i)
+int	check_pipe_syntax(const char *input, int i)
 {
-	int before;
-	int after;
+	int	before;
+	int	after;
 
 	if (i == 0 || input[i + 1] == '\0')
 	{
@@ -32,7 +28,8 @@ int check_pipe_syntax(const char *input, int i)
 		return (1);
 	}
 	before = i - 1;
-	while (before >= 0 && input[before] && isspace((unsigned char)input[before]))
+	while (before >= 0 && input[before]
+		&& isspace((unsigned char)input[before]))
 		before--;
 	after = skip_spaces(input, i + 1);
 	if (before < 0 || input[after] == '|' || input[after] == '\0')
@@ -43,13 +40,11 @@ int check_pipe_syntax(const char *input, int i)
 	return (0);
 }
 
-int check_redirection_syntax(const char *input, int *i)
+int	check_redirection_syntax(const char *input, int *i)
 {
-	//int start;
-	int count;
-	char type;
+	int		count;
+	char	type;
 
-	//start = *i;
 	count = 1;
 	type = input[*i];
 	(*i)++;
@@ -73,9 +68,9 @@ int check_redirection_syntax(const char *input, int *i)
 	return (0);
 }
 
-int check_syntax_errors(const char *input)
+int	check_syntax_errors(const char *input)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (input[i])
@@ -89,46 +84,38 @@ int check_syntax_errors(const char *input)
 		{
 			if (check_redirection_syntax(input, &i))
 				return (1);
-			continue;
+			continue ;
 		}
 		i++;
 	}
 	return (0);
 }
 
-int main(int ac, char **av, char **envp)
+int	main(int ac, char **av, char **envp)
 {
-    (void)ac;
-    (void)av;
-    (void)envp;
+	char	*str;
+	t_data	*data;
+	t_env	*env;
 
-    char *str = NULL;
-    t_data *data = NULL;
-    t_env   *env;
-
-    env = init_env_list(envp);
-    signal(SIGINT, int_handler);
-
-    while (1)
-    {
-        str = readline("minishell~$ ");
-        if (!str)
-		{
-			//free all
-            break;
-		}
-
-        if (parse_commands(str,&data))
-		{
-			//free all
+	(void)ac;
+	(void)av;
+	(void)envp;
+	str = NULL;
+	data = NULL;
+	env = init_env_list(envp);
+	signal(SIGINT, int_handler);
+	while (1)
+	{
+		str = readline("minishell~$ ");
+		if (!str)
+			break ;
+		if (parse_commands(str, &data))
 			continue ;
-		}
-        execute_command(data, env);
-		// free
+		execute_command(data, env);
 		data = NULL;
-        add_history(str);
-        free(str);
-    }
+		add_history(str);
+		free(str);
+	}
 	ft_free_all();
-    return 0;
+	return (0);
 }
